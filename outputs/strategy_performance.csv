@@ -1,0 +1,6 @@
+strategy_type,count,total_pnl,avg_pnl,win_rate,win_rate_pct
+Contrarian Buy (Fear),12353,2308116.8808,186.8467,0.823,82.3
+Contrarian Sell (Greed),28186,4062493.2448,144.1316,0.8709,87.09
+Momentum Buy (Greed),17843,802807.3388,44.9928,0.7512,75.12
+Momentum Sell (Fear),27861,1788148.8094,64.1811,0.8537,85.37
+Neutral Market,18159,1292920.6756,71.2,0.8239,82.39

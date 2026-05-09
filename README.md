@@ -6,20 +6,20 @@
 
 # Overview
 
-This project analyzes the relationship between cryptocurrency market sentiment and trader performance using historical trading activity from Hyperliquid alongside the Bitcoin Fear & Greed Index.
+This project analyzes the relationship between cryptocurrency market sentiment and trader performance using historical Hyperliquid trading data combined with the Bitcoin Fear & Greed Index.
 
-The primary objective is to uncover how emotional market conditions influence:
+The objective is to investigate how emotional market conditions influence:
 - trader profitability
-- trading behavior
-- position sizing
-- transaction activity
-- overall market risk exposure
+- trading activity
+- directional positioning
+- transaction costs
+- overall risk behavior
 
 The project combines:
 - Exploratory Data Analysis (EDA)
+- Statistical Testing
 - Behavioral Finance Interpretation
-- Risk Analysis
-- Market Sentiment Analysis
+- Strategy Analysis
 - Machine Learning
 
 to simulate a real-world quantitative trading research workflow.
@@ -28,23 +28,21 @@ to simulate a real-world quantitative trading research workflow.
 
 # Business Problem
 
-Cryptocurrency markets are highly driven by emotion, volatility, and speculative behavior.
+Cryptocurrency markets are highly influenced by:
+- emotion
+- volatility
+- speculative behavior
+- market psychology
 
-The Bitcoin Fear & Greed Index is commonly used to measure overall market psychology:
-- Fear reflects uncertainty and defensive positioning.
-- Greed reflects optimism and aggressive risk-taking.
+The Fear & Greed Index is commonly used to measure overall market sentiment:
+- Fear reflects uncertainty and defensive behavior
+- Greed reflects optimism and aggressive risk-taking
 
 This project investigates:
-1. How trader profitability changes under different market sentiment regimes.
-2. Whether traders take larger risks during Greed periods.
-3. How transaction costs impact effective profitability.
-4. Whether market sentiment contributes predictive information regarding trading outcomes.
-
-Understanding these relationships can help design:
-- sentiment-aware trading systems
-- better risk management frameworks
-- behavioral trading strategies
-- adaptive position sizing systems
+1. How trader profitability changes across sentiment regimes
+2. Whether traders increase exposure during Greed periods
+3. How transaction costs impact effective profitability
+4. Whether sentiment contributes predictive information regarding trading outcomes
 
 ---
 
@@ -52,12 +50,11 @@ Understanding these relationships can help design:
 
 ## 1. Hyperliquid Historical Trader Dataset
 
-Contains detailed trade-level information including:
+Contains:
 - Account
 - Coin
 - Execution Price
-- Size Tokens
-- Size USD
+- Trade Size
 - Direction
 - Fee
 - Closed PnL
@@ -66,29 +63,32 @@ Contains detailed trade-level information including:
 ## 2. Bitcoin Fear & Greed Index
 
 Contains:
-- Date
-- Fear/Greed classification
-- Sentiment score
+- sentiment classification
+- sentiment score
+- daily timestamps
 
-The datasets were merged using daily timestamps to analyze trader activity under different emotional market conditions.
+The datasets were merged using trading dates to analyze trader behavior under different emotional market conditions.
 
 ---
 
 # Project Structure
 
 ```bash
-hyperliquid-sentiment-analysis/
+bitcoin-trader-sentiment-analysis/
 │
 ├── data/
-│   ├── historical_data.csv
-│   └── fear_greed_index.csv
 │
 ├── notebooks/
 │   └── analysis.ipynb
 │
 ├── outputs/
-│   ├── processed_data.csv
-│   └── plots/
+│   ├── pnl_by_sentiment.csv
+│   ├── strategy_performance.csv
+│   ├── trader_performance.csv
+│   ├── top_coins.csv
+│   └── volume_by_sentiment.csv
+│
+├── plots/
 │
 ├── requirements.txt
 ├── README.md
@@ -108,11 +108,11 @@ The project workflow consists of:
 - feature engineering
 
 ## 2. Exploratory Data Analysis
-- sentiment distribution
 - profitability analysis
-- trade size analysis
+- sentiment distribution
 - transaction fee analysis
-- directional positioning behavior
+- directional trading analysis
+- volume analysis
 
 ## 3. Behavioral Finance Analysis
 - fear vs greed positioning
@@ -120,45 +120,39 @@ The project workflow consists of:
 - risk appetite analysis
 - overtrading patterns
 
-## 4. Machine Learning
+## 4. Statistical Testing
+- Kruskal-Wallis significance testing
+- Pearson correlation
+- Spearman correlation
+
+## 5. Machine Learning
 A Random Forest classifier was used to predict trade profitability using:
 - market sentiment
-- trade size
 - transaction fees
+- trade size
 
 ---
 
-# Feature Engineering
+# Key Insights
 
-Additional features were created to improve analytical depth:
+## 1. Sentiment Influences Profitability
+Trader profitability improved during Greed market conditions.
 
-- Profitability flag (`is_profit`)
-- Net PnL after transaction fees (`net_pnl`)
-- Absolute PnL (`abs_pnl`)
-- Trade size categorization
-- Encoded sentiment classification
+## 2. Emotional Markets Increase Volatility
+Fear periods showed larger downside volatility and unstable outcomes.
 
----
+## 3. Risk Appetite Increases During Greed
+Traders increased trade sizes during optimistic market phases.
 
-# Exploratory Data Analysis
+## 4. Transaction Costs Reduce Net Returns
+High trading activity resulted in elevated fee accumulation.
 
-The EDA section investigates:
-- market sentiment frequency
-- profitability distributions
-- fee accumulation patterns
-- trade sizing behavior
-- trader positioning trends
-
-Key visualizations include:
-- sentiment distribution charts
-- PnL distributions
-- fee analysis
-- correlation heatmaps
-- directional trading analysis
+## 5. Trader Positioning Follows Market Sentiment
+Long positioning dominated during Greed while defensive positioning increased during Fear.
 
 ---
 
-# Machine Learning Model
+# Machine Learning Results
 
 ## Model Used
 - Random Forest Classifier
@@ -166,34 +160,13 @@ Key visualizations include:
 ## Objective
 Predict whether a trade is profitable based on:
 - market sentiment
-- transaction fees
 - trade size
+- transaction fees
 
-## Model Performance
-
+## Performance
 - Accuracy: ~68%
-- The model demonstrates moderate predictive capability in highly volatile crypto trading environments.
 
-Given the stochastic nature of financial markets, this performance is considered realistic for an exploratory sentiment-aware predictive model.
-
----
-
-# Key Insights
-
-## 1. Sentiment Impacts Profitability
-Trader profitability improved during Greed market conditions.
-
-## 2. Emotional Markets Increase Risk
-Extreme Fear periods showed larger downside volatility and unstable outcomes.
-
-## 3. Traders Increase Exposure During Greed
-Trade sizes increased significantly during optimistic market conditions.
-
-## 4. Transaction Costs Matter
-High trading activity resulted in elevated fee accumulation, reducing effective profitability.
-
-## 5. Trader Positioning Follows Market Emotion
-Long positions dominated during Greed phases, while defensive positioning increased during Fear periods.
+Given the highly stochastic and volatile nature of cryptocurrency markets, this performance is considered realistic for an exploratory predictive trading model.
 
 ---
 
@@ -201,11 +174,11 @@ Long positions dominated during Greed phases, while defensive positioning increa
 
 The analysis reveals strong evidence of sentiment-driven trading behavior.
 
-### Observed Behavioral Patterns
+### Observed Patterns
 - Increased risk-taking during Greed
 - Defensive positioning during Fear
-- Overtrading during euphoric phases
-- Emotional market conditions amplifying volatility
+- Emotional volatility amplifying market instability
+- Overtrading during euphoric market conditions
 
 These findings align closely with established behavioral finance theories.
 
@@ -213,40 +186,20 @@ These findings align closely with established behavioral finance theories.
 
 # Strategic Recommendations
 
-Based on the analysis, the following recommendations are proposed:
-
 ## 1. Sentiment-Aware Position Sizing
 Reduce exposure during Extreme Fear conditions.
 
 ## 2. Fee Optimization
-Limit excessive trading activity during emotionally volatile markets.
+Limit excessive trading activity during volatile periods.
 
 ## 3. Dynamic Risk Controls
-Implement adaptive stop-loss systems during high-volatility periods.
+Implement adaptive stop-loss systems during high-volatility conditions.
 
 ## 4. Behavioral Monitoring
-Track aggressive risk-taking behavior during Greed phases.
+Track aggressive positioning during euphoric markets.
 
-## 5. Contrarian Opportunities
-Extreme Fear conditions may provide attractive long-term entry opportunities.
-
----
-
-# Limitations
-
-This project has several limitations:
-
-- Sentiment was analyzed using daily aggregated labels.
-- Intraday sentiment fluctuations were not captured.
-- External macroeconomic and news events were excluded.
-- The ML model is exploratory and not production-optimized.
-
-Future work may incorporate:
-- real-time sentiment feeds
-- time-series forecasting
-- deep learning models
-- reinforcement learning systems
-- portfolio optimization frameworks
+## 5. Contrarian Trading Opportunities
+Extreme Fear periods may offer attractive long-term entries.
 
 ---
 
@@ -265,19 +218,19 @@ Future work may incorporate:
 
 # How to Run
 
-## 1. Clone Repository
+## Clone Repository
 
 ```bash
 git clone <repository-url>
 ```
 
-## 2. Create Virtual Environment
+## Create Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-## 3. Activate Environment
+## Activate Environment
 
 ### Windows
 ```bash
@@ -289,13 +242,13 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-## 4. Install Dependencies
+## Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## 5. Run Notebook
+## Run Notebook
 
 Open:
 
@@ -309,13 +262,13 @@ and execute all cells.
 
 # Conclusion
 
-This project demonstrates that cryptocurrency market sentiment significantly influences:
+This project demonstrates that cryptocurrency market sentiment significantly impacts:
 - trader profitability
-- trade sizing behavior
-- transaction activity
+- transaction behavior
+- risk exposure
 - directional positioning
 
-The findings highlight the importance of integrating:
+The findings emphasize the importance of integrating:
 - behavioral finance
 - sentiment analysis
 - adaptive risk management
@@ -327,5 +280,3 @@ into modern quantitative trading systems.
 # Author
 
 Anushka Joshi
-
-Behavioral Market Sentiment Analysis Project
